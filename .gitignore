@@ -1,0 +1,6 @@
+__pycache__/
+.vscode/
+# pypi build files
+build/
+dist/
+*.egg-info/
