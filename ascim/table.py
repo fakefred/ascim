@@ -15,12 +15,11 @@ class ASCIMTable:
     def __init__(self, data: list):
         """Construct an ASCIM table object from a 2-dimensional list
 
-        When rows are different in width, extra `None`s are padded to their
+        When rows are different in width, extra ``None``s are padded to their
         right until all rows have the same amount of columns.
 
-        Arguments:
-        data -- for a w*h table, this is a len=h list of len-w lists, each
-        element of which populated by an ASCIM Image.
+        :param data: for a w*h table, this is a len=h list of len-w lists, each
+            element of which populated by an ASCIM Image.
         """
         self.__size = (max([len(r) for r in data]), len(data))
         for i, r in enumerate(data):
@@ -32,16 +31,20 @@ class ASCIMTable:
     def from_text(self, text: str):
         """Constructs an ASCIM Table from a string.
 
-        Note that the string `text` must conform to a set of rules,
-        as is generated from ASCIMTable's `to_text()`.
+        Note that the string ``text`` must conform to a set of rules,
+        as is generated from ASCIMTable's ``to_text()``.
         Valid table string:
-        +-----+-----+------+
-        | qwe | rty | uiop |
-        +-----+-----+------+
-        | asd | fgh | jkl  |
-        +-----+-----+------+
-        | zx  | cv  | bnm  |
-        +-----+-----+------+
+
+        .. code-block::
+
+            +-----+-----+------+
+            | qwe | rty | uiop |
+            +-----+-----+------+
+            | asd | fgh | jkl  |
+            +-----+-----+------+
+            | zx  | cv  | bnm  |
+            +-----+-----+------+
+
         """
 
         im = ASCIM(text)
@@ -76,6 +79,7 @@ class ASCIMTable:
         return ASCIMTable(cells)
 
     def to_text(self) -> str:
+        """:returns: textual representation of table."""
         # replace all None cells with an empty 1x1 ASCIM Image
         data = [[ASCIM.new((1, 1)) if col is None else col for col in row]
                 for row in self.__data]
@@ -109,30 +113,32 @@ class ASCIMTable:
     def new(cls, size: tuple):
         """Construct a blank ASCIM Table of a certain size.
 
-        Arguments:
-        size -- tuple (width, height) as size of the new ASCIM Table,
-        in number of cells.
+        :param size: tuple (width, height) as size of the new ASCIM Table,
+            in number of cells.
         """
 
         return ASCIMTable([[None] * size[0]] * size[1])
 
     def copy(self):
-        """Returns a copy of `self`."""
+        """:returns: a copy of `self`."""
         return ASCIMTable(self.__data)
 
     def cell_at(self, x: int, y: int):
         """Retrieve a single cell from table.
 
-        If (x, y) is inside of bound, return the cell, which can be `None`.
-        Else, return None.
+        :returns: ASCIM image or ``None`` as in the cell, or if ``(x, y)``
+            exceeds bound, ``None``.
         """
 
         return self.__data[y][x]
 
+    # TODO
     # def set_cell(self, x: int, y: int, cell):
 
     @property
     def size(self) -> tuple:
+        """:returns: size of table in (width, height) cells"""
+
         return self.__size
 
     def __in_bound(self, x: int, y: int) -> bool:

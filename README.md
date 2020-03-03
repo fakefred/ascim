@@ -119,7 +119,7 @@ human-readable. Here is an example:
 
 ### ASCIM Draw
 
-With ASCIM you can make in-place modifications with an ASCIM Image.
+With ASCIMDraw you can make in-place modifications with an ASCIM Image.
 An ASCIMDraw object takes a (reference to) an ASCIM object as its argument.
 
 Code example:

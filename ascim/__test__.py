@@ -1,9 +1,10 @@
 from .ascim import ASCIM
 from .draw import ASCIMDraw
-from .tables import ASCIMTable
+from .table import ASCIMTable
 
-"""Test basic ASCIM features."""
-digit_matrix = '''0123456789
+if __name__ == '__main__':
+    """Test basic ASCIM features."""
+    digit_matrix = '''0123456789
 1234567890
 2345678901
 3456789012
@@ -13,16 +14,16 @@ digit_matrix = '''0123456789
 7890123456
 8901234567
 9012345678'''
-im = ASCIM(digit_matrix)
-assert im.to_text() == digit_matrix
+    im = ASCIM(digit_matrix)
+    assert im.to_text() == digit_matrix
 
-full_of_x = ASCIM.new((5, 5), fill='x')
-x_matrix = ('xxxxx\n' * 5)[:-1]
-assert full_of_x.to_text() == x_matrix
+    full_of_x = ASCIM.new((5, 5), fill='x')
+    x_matrix = ('xxxxx\n' * 5)[:-1]
+    assert full_of_x.to_text() == x_matrix
 
-textbox = ASCIM('lorem\nipsum')
-im.paste(textbox, (4, 2))
-assert im.to_text() == '''0123456789
+    textbox = ASCIM('lorem\nipsum')
+    im.paste(textbox, (4, 2))
+    assert im.to_text() == '''0123456789
 1234567890
 2345lorem1
 3456ipsum2
@@ -33,7 +34,7 @@ assert im.to_text() == '''0123456789
 8901234567
 9012345678'''
 
-table_text = '''
+    table_text = '''
 +---------+-------+------------+
 | absolut | vodka | wooooo     |
 +---------+-------+------------+
@@ -44,10 +45,10 @@ table_text = '''
 +---------+-------+------------+
 '''.strip('\n')
 
-# print(ASCIMTable.from_text(table_text).cell_at(1, 1).to_text())
-# print(ASCIMTable.from_text(table_text).to_text())
-# print(ASCIMTable.new((3, 3)).to_text())
+    # print(ASCIMTable.from_text(table_text).cell_at(1, 1).to_text())
+    # print(ASCIMTable.from_text(table_text).to_text())
+    # print(ASCIMTable.new((3, 3)).to_text())
 
-draw = ASCIMDraw(im)
-draw.text((1, 5, 5, 2), 'lorem ipsum')
-print(im.to_text())
+    draw = ASCIMDraw(im)
+    draw.text((1, 5, 5, 2), 'lorem ipsum')
+    print(im.to_text())

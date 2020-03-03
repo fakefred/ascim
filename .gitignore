@@ -4,3 +4,7 @@ __pycache__/
 build/
 dist/
 *.egg-info/
+# sphinx build files
+_build/
+_static/
+_templates

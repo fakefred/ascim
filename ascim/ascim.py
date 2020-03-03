@@ -14,8 +14,7 @@ class ASCIM:
         When line widths vary, ASCIM will pad spaces to lines so that
         line widths are uniform.
 
-        Arguments:
-        text -- string to transform to an ASCIM object.
+        :param text: string to transform to an ASCIM object.
         """
 
         # all of what are assigned to `self` here are private.
@@ -30,8 +29,7 @@ class ASCIM:
     def from_list(cls, ls: list):
         """Construct an ASCIM Image from a list of strings.
 
-        Arguments:
-        ls -- list from which ASCIM Image is constructed.
+        :param ls: list from which ASCIM Image is constructed.
         """
         return ASCIM('\n'.join(ls))  # HACK
 
@@ -39,9 +37,8 @@ class ASCIM:
     def new(cls, size: tuple, fill=' '):
         """Construct a blank new ASCIM Image with a repeating single character.
 
-        Arguments:
-        size -- tuple (width, height) as size of the new ASCIM Image.
-        fill -- character to fill the image with.
+        :param size: tuple (width, height) as size of the new ASCIM Image.
+        :param fill: character to fill the image with.
         """
         if not is_char(fill):
             raise ValueError('`fill` must be an ascii character')
@@ -49,22 +46,24 @@ class ASCIM:
         return ASCIM(((fill * size[0] + '\n') * size[1])[:-1])
 
     def copy(self):
-        """Returns a copy of `self`."""
+        """:returns: A copy of image."""
         return ASCIM(self.to_text())
 
     def to_text(self) -> str:
+        """:returns: Textual representation of image"""
         return '\n'.join(self.__rows)
 
     def show(self):
+        """Prints image to stdout"""
         print(self.to_text())
 
     def to_rows(self) -> list:
-        """Returns a representation of `self` in a list of rows."""
+        """:returns: A representation of image in a list of rows."""
 
         return self.__rows
 
     def to_columns(self) -> list:
-        """Returns a representation of `self` in a list of columns."""
+        """:returns: A representation of image in a list of columns."""
 
         columns = []
         for x in range(self.__size[0]):
@@ -77,8 +76,8 @@ class ASCIM:
     def char_at(self, x: int, y: int) -> str:
         """Retrieve a single character from image.
 
-        If (x, y) is inside of bound, return the character.
-        Else, return None.
+        :returns: If (x, y) is inside of bound, the character at (x, y);
+            else, ``None``.
         """
 
         if self.__in_bound(x, y):
@@ -89,7 +88,7 @@ class ASCIM:
     def set_char(self, x: int, y: int, char: str):
         """Set one character of self to `char` in-place.
 
-        If `char` is not 1 in length, raise ValueError.
+        :raises: ValueError if `char` is not 1 in length.
         """
 
         if not isinstance(char, str) or not len(char) == 1:
@@ -100,23 +99,25 @@ class ASCIM:
 
     @property  # read-only
     def size(self) -> tuple:
+        """:returns: size of image in (width, height) characters"""
+
         return self.__size
 
     def crop(self, box: tuple):
-        """Returns a cropped copy of an ASCIM Image.
+        """:returns: a cropped copy of an ASCIM Image.
 
         When any parameter in `box` is out of bound, ASCIM will use the closest
         edge instead. For example, when `self` is 33 characters wide (right edge
         x=32) but a crop to right edge x=36, ASCIM will make the right edge x=32.
 
-        Arguments:
-        box -- a tuple of (left, top, width, height).
+        :param box: a tuple of (left, top, width, height).
         """
+
         return ASCIM.from_list(
             [r[box[0]:box[0]+box[2]] for r in self.__rows[box[1]:box[1]+box[3]]])
 
     def autocrop(self):
-        """Returns a copy of `self` with spaces on the edges cropped out. """
+        """:returns: a copy of `self` with spaces on the edges cropped out. """
 
         copy = self.copy()
         while copy.to_columns()[0].isspace():  # left
@@ -136,13 +137,12 @@ class ASCIM:
         When the location specified in `xy` exceeds image boundary, make no
         modification to `self`.
 
-        Arguments:
-        im -- ASCIM Image to paste on `self`.
-        xy -- a tuple of (left, top) for the corner to paste `im`.
-        transparency -- the character which, when in `im`, is interpreted as
-        a transparent pixel and will not overwrite the corresponding character
-        on the destination image. When set to a False value, no transparency
-        is applied.
+        :param im: ASCIM Image to paste on `self`.
+        :param xy: a tuple of (left, top) for the corner to paste `im`.
+        :param transparency: the character which, when in `im`, is interpreted as
+            a transparent pixel and will not overwrite the corresponding character
+            on the destination image. When set to a False value, no transparency
+            is applied.
         """
 
         imx, imy = im.size
@@ -158,6 +158,7 @@ class ASCIM:
 
     def __in_bound(self, x, y) -> bool:
         """Check if point(x, y) is inside image bound."""
+
         if 0 <= x < self.__size[0] and 0 <= y < self.__size[1]:
             return True
         return False

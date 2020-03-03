@@ -5,6 +5,11 @@ class ASCIMDraw:
     """Draw text and shapes on an ASCIM Image. Operations will be done in-place."""
 
     def __init__(self, im):
+        """Construct a ASCIMDraw object on a canvas.
+        
+        :param im: ASCIM Image this ASCIMDraw object applies modifications to.
+        """
+        
         if hasattr(im, 'size'):
             # HACK: very naïve duck type checking
             self.__image = im
@@ -14,14 +19,11 @@ class ASCIMDraw:
     def text(self, box: tuple, text: str, transparency=False):
         """Draw text on ASCIM Image.
 
-        Arguments:
-        box -- box to fit the text in. (left, top, width, height)
-        text -- text to draw on ASCIM Image.
-
-        Keyword arguments:
-        transparency -- if set to True, when the `text` to be drawn overlaps
-        with non-whitespace characters in the original image, the character
-        from the latter is kept. Otherwise, the character is a space.
+        :param box: box to fit the text in. (left, top, width, height)
+        :param text: text to draw on ASCIM Image.
+        :param transparency: if set to True, when the `text` to be drawn overlaps
+            with non-whitespace characters in the original image, the character
+            from the latter is kept. Otherwise, the character is a space.
         """
 
         wrapped = ''
