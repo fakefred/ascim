@@ -1,5 +1,5 @@
-.. py:module:: ASCIM
-.. py:currentmodule:: ASCIM
+.. py:module:: ascim.ascim.ASCIM
+.. py:currentmodule:: ascim.ascim.ASCIM
 
 :py:mod:`ASCIM` Module
 ======================

@@ -1,5 +1,5 @@
-.. py:module:: ASCIMDraw
-.. py:currentmodule:: ASCIMDraw
+.. py:module:: ascim.draw.ASCIMDraw
+.. py:currentmodule:: ascim.draw.ASCIMDraw
 
 :py:mod:`ASCIMDraw` Module
 ==========================

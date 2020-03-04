@@ -1,5 +1,5 @@
-.. py:module:: ASCIMTable
-.. py:currentmodule:: ASCIMTable
+.. py:module:: ascim.table.ASCIMTable
+.. py:currentmodule:: ascim.table.ASCIMTable
 
 :py:mod:`ASCIMTable` Module
 ===========================

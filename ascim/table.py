@@ -15,7 +15,7 @@ class ASCIMTable:
     def __init__(self, data: list):
         """Construct an ASCIM table object from a 2-dimensional list
 
-        When rows are different in width, extra ``None``s are padded to their
+        When rows are different in width, extra ``None`` are padded to their
         right until all rows have the same amount of columns.
 
         :param data: for a w*h table, this is a len=h list of len-w lists, each

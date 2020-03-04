@@ -21,7 +21,7 @@ class ASCIMDraw:
 
         :param box: box to fit the text in. (left, top, width, height)
         :param text: text to draw on ASCIM Image.
-        :param transparency: if set to True, when the `text` to be drawn overlaps
+        :param transparency: if set to True, when the ``text`` to be drawn overlaps
             with non-whitespace characters in the original image, the character
             from the latter is kept. Otherwise, the character is a space.
         """
